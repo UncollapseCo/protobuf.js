@@ -112,11 +112,12 @@ $root.vector_tile = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 3:
-                    if (!(message.layers && message.layers.length))
-                        message.layers = [];
-                    message.layers.push($root.vector_tile.Tile.Layer.decode(reader, reader.uint32()));
-                    break;
+                case 3: {
+                        if (!(message.layers && message.layers.length))
+                            message.layers = [];
+                        message.layers.push($root.vector_tile.Tile.Layer.decode(reader, reader.uint32()));
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -414,27 +415,34 @@ $root.vector_tile = (function() {
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.stringValue = reader.string();
-                        break;
-                    case 2:
-                        message.floatValue = reader.float();
-                        break;
-                    case 3:
-                        message.doubleValue = reader.double();
-                        break;
-                    case 4:
-                        message.intValue = reader.int64();
-                        break;
-                    case 5:
-                        message.uintValue = reader.uint64();
-                        break;
-                    case 6:
-                        message.sintValue = reader.sint64();
-                        break;
-                    case 7:
-                        message.boolValue = reader.bool();
-                        break;
+                    case 1: {
+                            message.stringValue = reader.string();
+                            break;
+                        }
+                    case 2: {
+                            message.floatValue = reader.float();
+                            break;
+                        }
+                    case 3: {
+                            message.doubleValue = reader.double();
+                            break;
+                        }
+                    case 4: {
+                            message.intValue = reader.int64();
+                            break;
+                        }
+                    case 5: {
+                            message.uintValue = reader.uint64();
+                            break;
+                        }
+                    case 6: {
+                            message.sintValue = reader.sint64();
+                            break;
+                        }
+                    case 7: {
+                            message.boolValue = reader.bool();
+                            break;
+                        }
                     default:
                         reader.skipType(tag & 7);
                         break;
@@ -513,7 +521,9 @@ $root.vector_tile = (function() {
                 if (object.doubleValue != null)
                     message.doubleValue = Number(object.doubleValue);
                 if (object.intValue != null)
-                    if ($util.Long)
+                    if (typeof BigInt !== "undefined")
+                        message.intValue = typeof object.intValue === "number" || typeof object.intValue === "string" ? BigInt(object.intValue) : $util._toBigInt(object.intValue.low, object.intValue.high, false);
+                    else if ($util.Long)
                         (message.intValue = $util.Long.fromValue(object.intValue)).unsigned = false;
                     else if (typeof object.intValue === "string")
                         message.intValue = parseInt(object.intValue, 10);
@@ -522,7 +532,9 @@ $root.vector_tile = (function() {
                     else if (typeof object.intValue === "object")
                         message.intValue = new $util.LongBits(object.intValue.low >>> 0, object.intValue.high >>> 0).toNumber();
                 if (object.uintValue != null)
-                    if ($util.Long)
+                    if (typeof BigInt !== "undefined")
+                        message.uintValue = typeof object.uintValue === "number" || typeof object.uintValue === "string" ? BigInt(object.uintValue) : $util._toBigInt(object.uintValue.low, object.uintValue.high, true);
+                    else if ($util.Long)
                         (message.uintValue = $util.Long.fromValue(object.uintValue)).unsigned = true;
                     else if (typeof object.uintValue === "string")
                         message.uintValue = parseInt(object.uintValue, 10);
@@ -531,7 +543,9 @@ $root.vector_tile = (function() {
                     else if (typeof object.uintValue === "object")
                         message.uintValue = new $util.LongBits(object.uintValue.low >>> 0, object.uintValue.high >>> 0).toNumber(true);
                 if (object.sintValue != null)
-                    if ($util.Long)
+                    if (typeof BigInt !== "undefined")
+                        message.sintValue = typeof object.sintValue === "number" || typeof object.sintValue === "string" ? BigInt(object.sintValue) : $util._toBigInt(object.sintValue.low, object.sintValue.high, false);
+                    else if ($util.Long)
                         (message.sintValue = $util.Long.fromValue(object.sintValue)).unsigned = false;
                     else if (typeof object.sintValue === "string")
                         message.sintValue = parseInt(object.sintValue, 10);
@@ -561,17 +575,23 @@ $root.vector_tile = (function() {
                     object.stringValue = "";
                     object.floatValue = 0;
                     object.doubleValue = 0;
-                    if ($util.Long) {
+                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                        object.intValue = BigInt("0");
+                    else if ($util.Long) {
                         var long = new $util.Long(0, 0, false);
                         object.intValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                     } else
                         object.intValue = options.longs === String ? "0" : 0;
-                    if ($util.Long) {
+                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                        object.uintValue = BigInt("0");
+                    else if ($util.Long) {
                         var long = new $util.Long(0, 0, true);
                         object.uintValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                     } else
                         object.uintValue = options.longs === String ? "0" : 0;
-                    if ($util.Long) {
+                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                        object.sintValue = BigInt("0");
+                    else if ($util.Long) {
                         var long = new $util.Long(0, 0, false);
                         object.sintValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                     } else
@@ -588,17 +608,17 @@ $root.vector_tile = (function() {
                     if (typeof message.intValue === "number")
                         object.intValue = options.longs === String ? String(message.intValue) : message.intValue;
                     else
-                        object.intValue = options.longs === String ? $util.Long.prototype.toString.call(message.intValue) : options.longs === Number ? new $util.LongBits(message.intValue.low >>> 0, message.intValue.high >>> 0).toNumber() : message.intValue;
+                        object.intValue = options.longs === String ? $util.Long.prototype.toString.call(message.intValue) : options.longs === Number ? new $util.LongBits(message.intValue.low >>> 0, message.intValue.high >>> 0).toNumber() : options.longs === BigInt ? new $util.LongBits(message.intValue.low >>> 0, message.intValue.high >>> 0).toBigInt() : message.intValue;
                 if (message.uintValue != null && message.hasOwnProperty("uintValue"))
                     if (typeof message.uintValue === "number")
                         object.uintValue = options.longs === String ? String(message.uintValue) : message.uintValue;
                     else
-                        object.uintValue = options.longs === String ? $util.Long.prototype.toString.call(message.uintValue) : options.longs === Number ? new $util.LongBits(message.uintValue.low >>> 0, message.uintValue.high >>> 0).toNumber(true) : message.uintValue;
+                        object.uintValue = options.longs === String ? $util.Long.prototype.toString.call(message.uintValue) : options.longs === Number ? new $util.LongBits(message.uintValue.low >>> 0, message.uintValue.high >>> 0).toNumber(true) : options.longs === BigInt ? new $util.LongBits(message.uintValue.low >>> 0, message.uintValue.high >>> 0).toBigInt(true) : message.uintValue;
                 if (message.sintValue != null && message.hasOwnProperty("sintValue"))
                     if (typeof message.sintValue === "number")
                         object.sintValue = options.longs === String ? String(message.sintValue) : message.sintValue;
                     else
-                        object.sintValue = options.longs === String ? $util.Long.prototype.toString.call(message.sintValue) : options.longs === Number ? new $util.LongBits(message.sintValue.low >>> 0, message.sintValue.high >>> 0).toNumber() : message.sintValue;
+                        object.sintValue = options.longs === String ? $util.Long.prototype.toString.call(message.sintValue) : options.longs === Number ? new $util.LongBits(message.sintValue.low >>> 0, message.sintValue.high >>> 0).toNumber() : options.longs === BigInt ? new $util.LongBits(message.sintValue.low >>> 0, message.sintValue.high >>> 0).toBigInt() : message.sintValue;
                 if (message.boolValue != null && message.hasOwnProperty("boolValue"))
                     object.boolValue = message.boolValue;
                 return object;
@@ -768,32 +788,36 @@ $root.vector_tile = (function() {
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 1:
-                        message.id = reader.uint64();
-                        break;
-                    case 2:
-                        if (!(message.tags && message.tags.length))
-                            message.tags = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
+                    case 1: {
+                            message.id = reader.uint64();
+                            break;
+                        }
+                    case 2: {
+                            if (!(message.tags && message.tags.length))
+                                message.tags = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message.tags.push(reader.uint32());
+                            } else
                                 message.tags.push(reader.uint32());
-                        } else
-                            message.tags.push(reader.uint32());
-                        break;
-                    case 3:
-                        message.type = reader.int32();
-                        break;
-                    case 4:
-                        if (!(message.geometry && message.geometry.length))
-                            message.geometry = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
+                            break;
+                        }
+                    case 3: {
+                            message.type = reader.int32();
+                            break;
+                        }
+                    case 4: {
+                            if (!(message.geometry && message.geometry.length))
+                                message.geometry = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message.geometry.push(reader.uint32());
+                            } else
                                 message.geometry.push(reader.uint32());
-                        } else
-                            message.geometry.push(reader.uint32());
-                        break;
+                            break;
+                        }
                     default:
                         reader.skipType(tag & 7);
                         break;
@@ -872,7 +896,9 @@ $root.vector_tile = (function() {
                     return object;
                 var message = new $root.vector_tile.Tile.Feature();
                 if (object.id != null)
-                    if ($util.Long)
+                    if (typeof BigInt !== "undefined")
+                        message.id = typeof object.id === "number" || typeof object.id === "string" ? BigInt(object.id) : $util._toBigInt(object.id.low, object.id.high, true);
+                    else if ($util.Long)
                         (message.id = $util.Long.fromValue(object.id)).unsigned = true;
                     else if (typeof object.id === "string")
                         message.id = parseInt(object.id, 10);
@@ -888,6 +914,12 @@ $root.vector_tile = (function() {
                         message.tags[i] = object.tags[i] >>> 0;
                 }
                 switch (object.type) {
+                default:
+                    if (typeof object.type === "number") {
+                        message.type = object.type;
+                        break;
+                    }
+                    break;
                 case "UNKNOWN":
                 case 0:
                     message.type = 0;
@@ -933,7 +965,9 @@ $root.vector_tile = (function() {
                     object.geometry = [];
                 }
                 if (options.defaults) {
-                    if ($util.Long) {
+                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                        object.id = BigInt("0");
+                    else if ($util.Long) {
                         var long = new $util.Long(0, 0, true);
                         object.id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                     } else
@@ -944,14 +978,14 @@ $root.vector_tile = (function() {
                     if (typeof message.id === "number")
                         object.id = options.longs === String ? String(message.id) : message.id;
                     else
-                        object.id = options.longs === String ? $util.Long.prototype.toString.call(message.id) : options.longs === Number ? new $util.LongBits(message.id.low >>> 0, message.id.high >>> 0).toNumber(true) : message.id;
+                        object.id = options.longs === String ? $util.Long.prototype.toString.call(message.id) : options.longs === Number ? new $util.LongBits(message.id.low >>> 0, message.id.high >>> 0).toNumber(true) : options.longs === BigInt ? new $util.LongBits(message.id.low >>> 0, message.id.high >>> 0).toBigInt(true) : message.id;
                 if (message.tags && message.tags.length) {
                     object.tags = [];
                     for (var j = 0; j < message.tags.length; ++j)
                         object.tags[j] = message.tags[j];
                 }
                 if (message.type != null && message.hasOwnProperty("type"))
-                    object.type = options.enums === String ? $root.vector_tile.Tile.GeomType[message.type] : message.type;
+                    object.type = options.enums === String ? $root.vector_tile.Tile.GeomType[message.type] === undefined ? message.type : $root.vector_tile.Tile.GeomType[message.type] : message.type;
                 if (message.geometry && message.geometry.length) {
                     object.geometry = [];
                     for (var j = 0; j < message.geometry.length; ++j)
@@ -1140,30 +1174,36 @@ $root.vector_tile = (function() {
                 while (reader.pos < end) {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
-                    case 15:
-                        message.version = reader.uint32();
-                        break;
-                    case 1:
-                        message.name = reader.string();
-                        break;
-                    case 2:
-                        if (!(message.features && message.features.length))
-                            message.features = [];
-                        message.features.push($root.vector_tile.Tile.Feature.decode(reader, reader.uint32()));
-                        break;
-                    case 3:
-                        if (!(message.keys && message.keys.length))
-                            message.keys = [];
-                        message.keys.push(reader.string());
-                        break;
-                    case 4:
-                        if (!(message.values && message.values.length))
-                            message.values = [];
-                        message.values.push($root.vector_tile.Tile.Value.decode(reader, reader.uint32()));
-                        break;
-                    case 5:
-                        message.extent = reader.uint32();
-                        break;
+                    case 15: {
+                            message.version = reader.uint32();
+                            break;
+                        }
+                    case 1: {
+                            message.name = reader.string();
+                            break;
+                        }
+                    case 2: {
+                            if (!(message.features && message.features.length))
+                                message.features = [];
+                            message.features.push($root.vector_tile.Tile.Feature.decode(reader, reader.uint32()));
+                            break;
+                        }
+                    case 3: {
+                            if (!(message.keys && message.keys.length))
+                                message.keys = [];
+                            message.keys.push(reader.string());
+                            break;
+                        }
+                    case 4: {
+                            if (!(message.values && message.values.length))
+                                message.values = [];
+                            message.values.push($root.vector_tile.Tile.Value.decode(reader, reader.uint32()));
+                            break;
+                        }
+                    case 5: {
+                            message.extent = reader.uint32();
+                            break;
+                        }
                     default:
                         reader.skipType(tag & 7);
                         break;

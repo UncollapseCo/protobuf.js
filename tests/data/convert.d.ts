@@ -1,6 +1,5 @@
 import * as $protobuf from "../..";
-import Long from "long";
-
+import Long = require("long");
 export interface IMessage {
     stringVal?: (string|null);
     stringRepeated?: (string[]|null);
@@ -11,6 +10,8 @@ export interface IMessage {
     enumVal?: (Message.SomeEnum|null);
     enumRepeated?: (Message.SomeEnum[]|null);
     int64Map?: ({ [k: string]: (number|Long) }|null);
+    fixed64Val?: (number|Long|null);
+    sfixed64Val?: (number|Long|null);
 }
 
 export class Message implements IMessage {
@@ -24,6 +25,8 @@ export class Message implements IMessage {
     public enumVal: Message.SomeEnum;
     public enumRepeated: Message.SomeEnum[];
     public int64Map: { [k: string]: (number|Long) };
+    public fixed64Val: (number|Long);
+    public sfixed64Val: (number|Long);
     public static create(properties?: IMessage): Message;
     public static encode(message: IMessage, writer?: $protobuf.Writer): $protobuf.Writer;
     public static encodeDelimited(message: IMessage, writer?: $protobuf.Writer): $protobuf.Writer;

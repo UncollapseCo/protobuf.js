@@ -101,9 +101,10 @@ $root.TypeUrlTest = (function() {
         while (reader.pos < end) {
             var tag = reader.uint32();
             switch (tag >>> 3) {
-            case 1:
-                message.nested = $root.TypeUrlTest.Nested.decode(reader, reader.uint32());
-                break;
+            case 1: {
+                    message.nested = $root.TypeUrlTest.Nested.decode(reader, reader.uint32());
+                    break;
+                }
             default:
                 reader.skipType(tag & 7);
                 break;
@@ -305,9 +306,10 @@ $root.TypeUrlTest = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.a = reader.string();
-                    break;
+                case 1: {
+                        message.a = reader.string();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;

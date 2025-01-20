@@ -73,13 +73,44 @@ LongBits.fromNumber = function fromNumber(value) {
 };
 
 /**
+ * Constructs new long bits from the specified bigint.
+ * @param {bigint} value Value
+ * @returns {util.LongBits} Instance
+ */
+LongBits.fromBigInt = function fromNumber(value) {
+    var TWO_32 = BigInt("4294967296");
+    value = BigInt(value);
+    if (value === BigInt("0")) return zero;
+  
+    var negative = value < 0;
+    if (negative) {
+      value = -value;
+    }
+    var hi = Number(value >> BigInt("32")) | 0;
+    var lo = Number(value - (BigInt(hi) << BigInt("32"))) | 0;
+  
+    if (negative) {
+      hi = ~hi >>> 0;
+      lo = ~lo >>> 0;
+      if (++lo > TWO_32) {
+        lo = 0;
+        if (++hi > TWO_32) hi = 0;
+      }
+    }
+  
+    return new LongBits(lo, hi);
+  };
+
+/**
  * Constructs new long bits from a number, long or string.
- * @param {Long|number|string} value Value
+ * @param {Long|number|string|bigint} value Value
  * @returns {util.LongBits} Instance
  */
 LongBits.from = function from(value) {
     if (typeof value === "number")
         return LongBits.fromNumber(value);
+    if (typeof value === "bigint")
+        return LongBits.fromBigInt(value);
     if (util.isString(value)) {
         /* istanbul ignore else */
         if (util.Long)
@@ -105,6 +136,15 @@ LongBits.prototype.toNumber = function toNumber(unsigned) {
     }
     return this.lo + this.hi * 4294967296;
 };
+
+/**
+ * Convert this long bits to a bigint.
+ * @param {boolean} [unsigned=false] Whether unsigned or not
+ * @returns {bigint} BigInt
+ */
+LongBits.prototype.toBigInt = function toBigInt(unsigned) {
+    return util._toBigInt(this.lo, this.hi, unsigned);
+}
 
 /**
  * Converts this long bits to a long.

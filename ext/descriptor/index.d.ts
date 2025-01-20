@@ -1,4 +1,5 @@
 import * as $protobuf from "../..";
+import Long = require("long");
 export const FileDescriptorSet: $protobuf.Type;
 
 export const FileDescriptorProto: $protobuf.Type;

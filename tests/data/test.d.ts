@@ -1,6 +1,5 @@
 import * as $protobuf from "../..";
-import Long from "long";
-
+import Long = require("long");
 export namespace jspb {
 
     namespace test {
@@ -438,6 +437,8 @@ export namespace jspb {
             repeatedGroup?: (jspb.test.TestGroup.IRepeatedGroup[]|null);
             requiredGroup: jspb.test.TestGroup.IRequiredGroup;
             optionalGroup?: (jspb.test.TestGroup.IOptionalGroup|null);
+            messageInGroup?: (jspb.test.TestGroup.IMessageInGroup|null);
+            enumInGroup?: (jspb.test.TestGroup.IEnumInGroup|null);
             id?: (string|null);
             requiredSimple: jspb.test.ISimple2;
             optionalSimple?: (jspb.test.ISimple2|null);
@@ -448,6 +449,8 @@ export namespace jspb {
             public repeatedGroup: jspb.test.TestGroup.IRepeatedGroup[];
             public requiredGroup: jspb.test.TestGroup.IRequiredGroup;
             public optionalGroup?: (jspb.test.TestGroup.IOptionalGroup|null);
+            public messageInGroup?: (jspb.test.TestGroup.IMessageInGroup|null);
+            public enumInGroup?: (jspb.test.TestGroup.IEnumInGroup|null);
             public id: string;
             public requiredSimple: jspb.test.ISimple2;
             public optionalSimple?: (jspb.test.ISimple2|null);
@@ -522,6 +525,74 @@ export namespace jspb {
                 public static toObject(message: jspb.test.TestGroup.OptionalGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
                 public toJSON(): { [k: string]: any };
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            interface IMessageInGroup {
+                id: jspb.test.TestGroup.MessageInGroup.INestedMessage;
+            }
+
+            class MessageInGroup implements IMessageInGroup {
+                constructor(properties?: jspb.test.TestGroup.IMessageInGroup);
+                public id: jspb.test.TestGroup.MessageInGroup.INestedMessage;
+                public static create(properties?: jspb.test.TestGroup.IMessageInGroup): jspb.test.TestGroup.MessageInGroup;
+                public static encode(message: jspb.test.TestGroup.IMessageInGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: jspb.test.TestGroup.IMessageInGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): jspb.test.TestGroup.MessageInGroup;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): jspb.test.TestGroup.MessageInGroup;
+                public static verify(message: { [k: string]: any }): (string|null);
+                public static fromObject(object: { [k: string]: any }): jspb.test.TestGroup.MessageInGroup;
+                public static toObject(message: jspb.test.TestGroup.MessageInGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public toJSON(): { [k: string]: any };
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace MessageInGroup {
+
+                interface INestedMessage {
+                    id?: (string|null);
+                }
+
+                class NestedMessage implements INestedMessage {
+                    constructor(properties?: jspb.test.TestGroup.MessageInGroup.INestedMessage);
+                    public id: string;
+                    public static create(properties?: jspb.test.TestGroup.MessageInGroup.INestedMessage): jspb.test.TestGroup.MessageInGroup.NestedMessage;
+                    public static encode(message: jspb.test.TestGroup.MessageInGroup.INestedMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: jspb.test.TestGroup.MessageInGroup.INestedMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): jspb.test.TestGroup.MessageInGroup.NestedMessage;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): jspb.test.TestGroup.MessageInGroup.NestedMessage;
+                    public static verify(message: { [k: string]: any }): (string|null);
+                    public static fromObject(object: { [k: string]: any }): jspb.test.TestGroup.MessageInGroup.NestedMessage;
+                    public static toObject(message: jspb.test.TestGroup.MessageInGroup.NestedMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public toJSON(): { [k: string]: any };
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
+            interface IEnumInGroup {
+                id: jspb.test.TestGroup.EnumInGroup.NestedEnum;
+            }
+
+            class EnumInGroup implements IEnumInGroup {
+                constructor(properties?: jspb.test.TestGroup.IEnumInGroup);
+                public id: jspb.test.TestGroup.EnumInGroup.NestedEnum;
+                public static create(properties?: jspb.test.TestGroup.IEnumInGroup): jspb.test.TestGroup.EnumInGroup;
+                public static encode(message: jspb.test.TestGroup.IEnumInGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: jspb.test.TestGroup.IEnumInGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): jspb.test.TestGroup.EnumInGroup;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): jspb.test.TestGroup.EnumInGroup;
+                public static verify(message: { [k: string]: any }): (string|null);
+                public static fromObject(object: { [k: string]: any }): jspb.test.TestGroup.EnumInGroup;
+                public static toObject(message: jspb.test.TestGroup.EnumInGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public toJSON(): { [k: string]: any };
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace EnumInGroup {
+
+                enum NestedEnum {
+                    first = 0,
+                    second = 1
+                }
             }
         }
 
@@ -876,12 +947,14 @@ export namespace google {
             interface IExtensionRange {
                 start?: (number|null);
                 end?: (number|null);
+                options?: (google.protobuf.IExtensionRangeOptions|null);
             }
 
             class ExtensionRange implements IExtensionRange {
                 constructor(properties?: google.protobuf.DescriptorProto.IExtensionRange);
                 public start: number;
                 public end: number;
+                public options?: (google.protobuf.IExtensionRangeOptions|null);
                 public static create(properties?: google.protobuf.DescriptorProto.IExtensionRange): google.protobuf.DescriptorProto.ExtensionRange;
                 public static encode(message: google.protobuf.DescriptorProto.IExtensionRange, writer?: $protobuf.Writer): $protobuf.Writer;
                 public static encodeDelimited(message: google.protobuf.DescriptorProto.IExtensionRange, writer?: $protobuf.Writer): $protobuf.Writer;
@@ -913,6 +986,64 @@ export namespace google {
                 public static toObject(message: google.protobuf.DescriptorProto.ReservedRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
                 public toJSON(): { [k: string]: any };
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+        }
+
+        interface IExtensionRangeOptions {
+            uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+            declaration?: (google.protobuf.ExtensionRangeOptions.IDeclaration[]|null);
+            verification?: (google.protobuf.ExtensionRangeOptions.VerificationState|null);
+        }
+
+        class ExtensionRangeOptions implements IExtensionRangeOptions {
+            constructor(properties?: google.protobuf.IExtensionRangeOptions);
+            public uninterpretedOption: google.protobuf.IUninterpretedOption[];
+            public declaration: google.protobuf.ExtensionRangeOptions.IDeclaration[];
+            public verification: google.protobuf.ExtensionRangeOptions.VerificationState;
+            public static create(properties?: google.protobuf.IExtensionRangeOptions): google.protobuf.ExtensionRangeOptions;
+            public static encode(message: google.protobuf.IExtensionRangeOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: google.protobuf.IExtensionRangeOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions;
+            public static verify(message: { [k: string]: any }): (string|null);
+            public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions;
+            public static toObject(message: google.protobuf.ExtensionRangeOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public toJSON(): { [k: string]: any };
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ExtensionRangeOptions {
+
+            interface IDeclaration {
+                number?: (number|null);
+                fullName?: (string|null);
+                type?: (string|null);
+                reserved?: (boolean|null);
+                repeated?: (boolean|null);
+            }
+
+            class Declaration implements IDeclaration {
+                constructor(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration);
+                public number: number;
+                public fullName: string;
+                public type: string;
+                public reserved: boolean;
+                public repeated: boolean;
+                public static create(properties?: google.protobuf.ExtensionRangeOptions.IDeclaration): google.protobuf.ExtensionRangeOptions.Declaration;
+                public static encode(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: google.protobuf.ExtensionRangeOptions.IDeclaration, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ExtensionRangeOptions.Declaration;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ExtensionRangeOptions.Declaration;
+                public static verify(message: { [k: string]: any }): (string|null);
+                public static fromObject(object: { [k: string]: any }): google.protobuf.ExtensionRangeOptions.Declaration;
+                public static toObject(message: google.protobuf.ExtensionRangeOptions.Declaration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public toJSON(): { [k: string]: any };
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            enum VerificationState {
+                DECLARATION = 0,
+                UNVERIFIED = 1
             }
         }
 

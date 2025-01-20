@@ -1730,7 +1730,7 @@ export interface IConversionOptions {
 
     /**
      * Long conversion type.
-     * Valid values are `String` and `Number` (the global types).
+     * Valid values are `BigInt`, `String`, and `Number` (the global types).
      * Defaults to copy the present value, which is a possibly unsafe number without and a {@link Long} with a long library.
      */
     longs?: Function;
@@ -1932,11 +1932,18 @@ export namespace util {
         public static fromNumber(value: number): util.LongBits;
 
         /**
+         * Constructs new long bits from the specified bigint.
+         * @param value Value
+         * @returns Instance
+         */
+        public static fromBigInt(value: bigint): util.LongBits;
+
+        /**
          * Constructs new long bits from a number, long or string.
          * @param value Value
          * @returns Instance
          */
-        public static from(value: (Long|number|string)): util.LongBits;
+        public static from(value: (Long|number|string|bigint)): util.LongBits;
 
         /**
          * Converts this long bits to a possibly unsafe JavaScript number.
@@ -1944,6 +1951,13 @@ export namespace util {
          * @returns Possibly unsafe number
          */
         public toNumber(unsigned?: boolean): number;
+
+        /**
+         * Convert this long bits to a bigint.
+         * @param [unsigned=false] Whether unsigned or not
+         * @returns BigInt
+         */
+        public toBigInt(unsigned?: boolean): bigint;
 
         /**
          * Converts this long bits to a long.
@@ -2064,7 +2078,7 @@ export namespace util {
      * @param value Value to convert
      * @returns Hash
      */
-    function longToHash(value: (Long|number)): string;
+    function longToHash(value: (Long|number|bigint)): string;
 
     /**
      * Converts an 8 characters long hash string to a long or number.
@@ -2579,7 +2593,7 @@ export class Writer {
      * @returns `this`
      * @throws {TypeError} If `value` is a string and no long library is present.
      */
-    public uint64(value: (Long|number|string)): Writer;
+    public uint64(value: (Long|number|string|bigint)): Writer;
 
     /**
      * Writes a signed 64 bit value as a varint.
@@ -2587,7 +2601,7 @@ export class Writer {
      * @returns `this`
      * @throws {TypeError} If `value` is a string and no long library is present.
      */
-    public int64(value: (Long|number|string)): Writer;
+    public int64(value: (Long|number|string|bigint)): Writer;
 
     /**
      * Writes a signed 64 bit value as a varint, zig-zag encoded.
@@ -2595,7 +2609,7 @@ export class Writer {
      * @returns `this`
      * @throws {TypeError} If `value` is a string and no long library is present.
      */
-    public sint64(value: (Long|number|string)): Writer;
+    public sint64(value: (Long|number|string|bigint)): Writer;
 
     /**
      * Writes a boolish value as a varint.
