@@ -1,8 +1,8 @@
 protobufjs-cli
 ==============
-[![npm](https://img.shields.io/npm/v/protobufjs-cli.svg)](https://www.npmjs.com/package/protobufjs-cli)
+[![npm](https://img.shields.io/npm/v/@tanglechat/protobufjs-cli.svg)](https://www.npmjs.com/package/@tanglechat/protobufjs-cli)
 
-Command line interface (CLI) for [protobuf.js](https://github.com/dcodeIO/protobuf.js).
+Command line interface (CLI) for [protobuf.js](https://github.com/uncollapseco/protobuf.js). Forked for bigint support.
 
 This can be used to translate between file formats and to generate static code as well as TypeScript definitions.
 
@@ -165,7 +165,7 @@ There is no significant difference performance-wise as the code generated static
 Both utilities can be used programmatically by providing command line arguments and a callback to their respective `main` functions:
 
 ```js
-var pbjs = require("protobufjs-cli/pbjs"); // or require("protobufjs-cli").pbjs / .pbts
+var pbjs = require("@tanglechat/protobufjs-cli/pbjs"); // or require("protobufjs-cli").pbjs / .pbts
 
 pbjs.main([ "--target", "json-module", "path/to/myproto.proto" ], function(err, output) {
     if (err)

@@ -3,7 +3,7 @@ module.exports = proto_target;
 
 proto_target.private = true;
 
-var protobuf = require("protobufjs");
+var protobuf = require("@tanglechat/protobufjs");
 
 var Namespace  = protobuf.Namespace,
     Enum       = protobuf.Enum,

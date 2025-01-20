@@ -1,12 +1,13 @@
 {
   "name": "@tanglechat/protobufjs",
-  "version": "7.5.1",
+  "version": "7.5.3",
   "versionScheme": "~",
-  "description": "Protocol Buffers for JavaScript (& TypeScript).",
-  "author": "Daniel Wirtz <dcode+protobufjs@dcode.io>",
+  "description": "Protocol Buffers for JavaScript (& TypeScript). Forked for bigint support.",
+  "author": "Folf <folf@uncollapse.com>",
+  "contributors": ["Daniel Wirtz <dcode+protobufjs@dcode.io>"],
   "license": "BSD-3-Clause",
-  "repository": "protobufjs/protobuf.js",
-  "bugs": "https://github.com/protobufjs/protobuf.js/issues",
+  "repository": "uncollapseco/protobuf.js",
+  "bugs": "https://github.com/uncollapseco/protobuf.js/issues",
   "homepage": "https://protobufjs.github.io/protobuf.js/",
   "engines": {
     "node": ">=12.0.0"

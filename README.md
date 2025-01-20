@@ -1,7 +1,7 @@
-<h1><p align="center"><img alt="protobuf.js" src="https://github.com/protobufjs/protobuf.js/raw/master/pbjs.svg" height="100" /><br/>protobuf.js</p></h1>
+<h1><p align="center"><img alt="protobuf.js" src="https://github.com/uncollapseco/protobuf.js/raw/master/pbjs.svg" height="100" /><br/>protobuf.js</p></h1>
 <p align="center">
-  <a href="https://github.com/protobufjs/protobuf.js/actions/workflows/test.yml"><img src="https://img.shields.io/github/actions/workflow/status/protobufjs/protobuf.js/test.yml?branch=master&label=build&logo=github" alt=""></a>
-  <a href="https://github.com/protobufjs/protobuf.js/actions/workflows/release.yaml"><img src="https://img.shields.io/github/actions/workflow/status/protobufjs/protobuf.js/release.yaml?branch=master&label=release&logo=github" alt=""></a>
+  <a href="https://github.com/uncollapseco/protobuf.js/actions/workflows/test.yml"><img src="https://img.shields.io/github/actions/workflow/status/uncollapseco/protobuf.js/test.yml?branch=master&label=build&logo=github" alt=""></a>
+  <a href="https://github.com/uncollapseco/protobuf.js/actions/workflows/release.yaml"><img src="https://img.shields.io/github/actions/workflow/status/uncollapseco/protobuf.js/release.yaml?branch=master&label=release&logo=github" alt=""></a>
   <a href="https://npmjs.org/package/@tanglechat/protobufjs"><img src="https://img.shields.io/npm/v/@tanglechat/protobufjs.svg?logo=npm" alt=""></a>
   <a href="https://npmjs.org/package/@tanglechat/protobufjs"><img src="https://img.shields.io/npm/dm/@tanglechat/protobufjs.svg?label=downloads&logo=npm" alt=""></a>
   <a href="https://www.jsdelivr.com/package/npm/@tanglechat/protobufjs"><img src="https://img.shields.io/jsdelivr/npm/hm/@tanglechat/protobufjs?label=requests&logo=jsdelivr" alt=""></a>
@@ -197,7 +197,7 @@ For reference, the following diagram aims to display relationships between the d
 
 <p align="center"><img alt="Toolset Diagram" src="https://protobufjs.github.io/protobuf.js/toolset.svg" /></p>
 
-> In other words: `verify` indicates that calling `create` or `encode` directly on the plain object will [result in a valid message respectively] succeed. `fromObject`, on the other hand, does conversion from a broader range of plain objects to create valid messages. ([ref](https://github.com/protobufjs/protobuf.js/issues/748#issuecomment-291925749))
+> In other words: `verify` indicates that calling `create` or `encode` directly on the plain object will [result in a valid message respectively] succeed. `fromObject`, on the other hand, does conversion from a broader range of plain objects to create valid messages. ([ref](https://github.com/uncollapseco/protobuf.js/issues/748#issuecomment-291925749))
 
 Examples
 --------
@@ -469,13 +469,13 @@ greeter.sayHello({ name: 'you' })
     });
 ```
 
-There is also an [example for streaming RPC](https://github.com/protobufjs/protobuf.js/blob/master/examples/streaming-rpc.js).
+There is also an [example for streaming RPC](https://github.com/uncollapseco/protobuf.js/blob/master/examples/streaming-rpc.js).
 
 Note that the service API is meant for clients. Implementing a server-side endpoint pretty much always requires transport channel (i.e. http, websocket, etc.) specific code with the only common denominator being that it decodes and encodes messages.
 
 ### Usage with TypeScript
 
-The library ships with its own [type definitions](https://github.com/protobufjs/protobuf.js/blob/master/index.d.ts) and modern editors like [Visual Studio Code](https://code.visualstudio.com/) will automatically detect and use them for code completion.
+The library ships with its own [type definitions](https://github.com/uncollapseco/protobuf.js/blob/master/index.d.ts) and modern editors like [Visual Studio Code](https://code.visualstudio.com/) will automatically detect and use them for code completion.
 
 The npm package depends on [@types/node](https://www.npmjs.com/package/@types/node) because of `Buffer` and [@types/long](https://www.npmjs.com/package/@types/long) because of `Long`. If you are not building for node and/or not using long.js, it should be safe to exclude them manually.
 
@@ -484,7 +484,7 @@ The npm package depends on [@types/node](https://www.npmjs.com/package/@types/no
 The API shown above works pretty much the same with TypeScript. However, because everything is typed, accessing fields on instances of dynamically generated message classes requires either using bracket-notation (i.e. `message["awesomeField"]`) or explicit casts. Alternatively, it is possible to use a [typings file generated for its static counterpart](#pbts-for-typescript).
 
 ```ts
-import { load } from "protobufjs"; // respectively "./node_modules/protobufjs"
+import { load } from "@tanglechat/protobufjs"; // respectively "./node_modules/protobufjs"
 
 load("awesome.proto", function(err, root) {
   if (err)
@@ -524,7 +524,7 @@ The library also includes an early implementation of [decorators](https://www.ty
 **Note** that decorators are an experimental feature in TypeScript and that declaration order is important depending on the JS target. For example, `@Field.d(2, AwesomeArrayMessage)` requires that `AwesomeArrayMessage` has been defined earlier when targeting `ES5`.
 
 ```ts
-import { Message, Type, Field, OneOf } from "protobufjs/light"; // respectively "./node_modules/protobufjs/light.js"
+import { Message, Type, Field, OneOf } from "@tanglechat/protobufjs/light"; // respectively "./node_modules/protobufjs/light.js"
 
 export class AwesomeSubMessage extends Message<AwesomeSubMessage> {
 
@@ -592,8 +592,8 @@ Additional documentation
 
 #### protobuf.js
 * [API Documentation](https://protobufjs.github.io/protobuf.js)
-* [CHANGELOG](https://github.com/protobufjs/protobuf.js/blob/master/CHANGELOG.md)
-* [Frequently asked questions](https://github.com/protobufjs/protobuf.js/wiki) on our wiki
+* [CHANGELOG](https://github.com/uncollapseco/protobuf.js/blob/master/CHANGELOG.md)
+* [Frequently asked questions](https://github.com/uncollapseco/protobuf.js/wiki) on our wiki
 
 #### Community
 * [Questions and answers](http://stackoverflow.com/search?tab=newest&q=protobuf.js) on StackOverflow
@@ -653,13 +653,13 @@ These results are achieved by
 * using node-specific functionality where beneficial and, of course
 * avoiding unnecessary operations through splitting up [the toolset](#toolset).
 
-You can also run [the benchmark](https://github.com/protobufjs/protobuf.js/blob/master/bench/index.js) ...
+You can also run [the benchmark](https://github.com/uncollapseco/protobuf.js/blob/master/bench/index.js) ...
 
 ```
 $> npm run bench
 ```
 
-and [the profiler](https://github.com/protobufjs/protobuf.js/blob/master/bench/prof.js) yourself (the latter requires a recent version of node):
+and [the profiler](https://github.com/uncollapseco/protobuf.js/blob/master/bench/prof.js) yourself (the latter requires a recent version of node):
 
 ```
 $> npm run prof <encode|decode|encode-browser|decode-browser> [iterations=10000000]
@@ -673,10 +673,10 @@ Compatibility
 * Works in all modern and not-so-modern browsers except IE8.
 * Because the internals of this package do not rely on `google/protobuf/descriptor.proto`, options are parsed and presented literally.
 * If typed arrays are not supported by the environment, plain arrays will be used instead.
-* Support for pre-ES5 environments (except IE8) can be achieved by [using a polyfill](https://github.com/protobufjs/protobuf.js/blob/master/lib/polyfill.js).
+* Support for pre-ES5 environments (except IE8) can be achieved by [using a polyfill](https://github.com/uncollapseco/protobuf.js/blob/master/lib/polyfill.js).
 * Support for [Content Security Policy](https://w3c.github.io/webappsec-csp/)-restricted environments (like Chrome extensions without unsafe-eval) can be achieved by generating and using static code instead.
 * If a proper way to work with 64 bit values (uint64, int64 etc.) is required, just install [long.js](https://github.com/dcodeIO/long.js) alongside this library. All 64 bit numbers will then be returned as a `Long` instance instead of a possibly unsafe JavaScript number ([see](https://github.com/dcodeIO/long.js)).
-* For descriptor.proto interoperability, see [ext/descriptor](https://github.com/protobufjs/protobuf.js/tree/master/ext/descriptor)
+* For descriptor.proto interoperability, see [ext/descriptor](https://github.com/uncollapseco/protobuf.js/tree/master/ext/descriptor)
 
 Building
 --------
@@ -684,7 +684,7 @@ Building
 To build the library or its components yourself, clone it from GitHub and install the development dependencies:
 
 ```
-$> git clone https://github.com/protobufjs/protobuf.js.git
+$> git clone https://github.com/uncollapseco/protobuf.js.git
 $> cd protobuf.js
 $> npm install
 ```
@@ -722,6 +722,6 @@ By default, protobuf.js integrates into any browserify build-process without req
   protobuf.configure();
   ```
 
-* If you have any special requirements, there is [the bundler](https://github.com/protobufjs/protobuf.js/blob/master/scripts/bundle.js) for reference.
+* If you have any special requirements, there is [the bundler](https://github.com/uncollapseco/protobuf.js/blob/master/scripts/bundle.js) for reference.
 
 **License:** [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause)

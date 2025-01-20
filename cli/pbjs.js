@@ -6,7 +6,7 @@ var path     = require("path"),
     pkg      = require("./package.json"),
     util     = require("./util"),
     glob     = require("glob"),
-    protobuf = require("protobufjs");
+    protobuf = require("@tanglechat/protobufjs");
 
 var targets  = util.requireAll("./targets");
 

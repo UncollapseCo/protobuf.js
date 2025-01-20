@@ -3,7 +3,7 @@ module.exports = json_module;
 
 var util = require("../util");
 
-var protobuf = require("protobufjs");
+var protobuf = require("@tanglechat/protobufjs");
 
 json_module.description = "JSON representation as a module";
 
@@ -27,7 +27,7 @@ function json_module(root, options, callback) {
         }
         var json = jsonSafeProp(JSON.stringify(root.nested, null, 2).trim());
         output.push(".addJSON(" + json + ");");
-        output = util.wrap(output.join(""), protobuf.util.merge({ dependency: "protobufjs/light" }, options));
+        output = util.wrap(output.join(""), protobuf.util.merge({ dependency: "@tanglechat/protobufjs/light" }, options));
         process.nextTick(function() {
             callback(null, output);
         });
