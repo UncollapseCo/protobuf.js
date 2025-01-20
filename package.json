@@ -1,6 +1,6 @@
 {
   "name": "@tanglechat/protobufjs",
-  "version": "7.5.3",
+  "version": "7.5.4",
   "versionScheme": "~",
   "description": "Protocol Buffers for JavaScript (& TypeScript). Forked for bigint support.",
   "author": "Folf <folf@uncollapse.com>",
