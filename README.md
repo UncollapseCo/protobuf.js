@@ -2,9 +2,9 @@
 <p align="center">
   <a href="https://github.com/protobufjs/protobuf.js/actions/workflows/test.yml"><img src="https://img.shields.io/github/actions/workflow/status/protobufjs/protobuf.js/test.yml?branch=master&label=build&logo=github" alt=""></a>
   <a href="https://github.com/protobufjs/protobuf.js/actions/workflows/release.yaml"><img src="https://img.shields.io/github/actions/workflow/status/protobufjs/protobuf.js/release.yaml?branch=master&label=release&logo=github" alt=""></a>
-  <a href="https://npmjs.org/package/protobufjs"><img src="https://img.shields.io/npm/v/protobufjs.svg?logo=npm" alt=""></a>
-  <a href="https://npmjs.org/package/protobufjs"><img src="https://img.shields.io/npm/dm/protobufjs.svg?label=downloads&logo=npm" alt=""></a>
-  <a href="https://www.jsdelivr.com/package/npm/protobufjs"><img src="https://img.shields.io/jsdelivr/npm/hm/protobufjs?label=requests&logo=jsdelivr" alt=""></a>
+  <a href="https://npmjs.org/package/@tanglechat/protobufjs"><img src="https://img.shields.io/npm/v/@tanglechat/protobufjs.svg?logo=npm" alt=""></a>
+  <a href="https://npmjs.org/package/@tanglechat/protobufjs"><img src="https://img.shields.io/npm/dm/@tanglechat/protobufjs.svg?label=downloads&logo=npm" alt=""></a>
+  <a href="https://www.jsdelivr.com/package/npm/@tanglechat/protobufjs"><img src="https://img.shields.io/jsdelivr/npm/hm/@tanglechat/protobufjs?label=requests&logo=jsdelivr" alt=""></a>
 </p>
 
 **Protocol Buffers** are a language-neutral, platform-neutral, extensible way of serializing structured data for use in communications protocols, data storage, and more, originally designed at Google ([see](https://protobuf.dev/)).
@@ -51,24 +51,24 @@ Installation
 ### Node.js
 
 ```sh
-npm install protobufjs --save
+npm install @tanglechat/protobufjs --save
 ```
 
 ```js
 // Static code + Reflection + .proto parser
-var protobuf = require("protobufjs");
+var protobuf = require("@tanglechat/protobufjs");
 
 // Static code + Reflection
-var protobuf = require("protobufjs/light");
+var protobuf = require("@tanglechat/protobufjs/light");
 
 // Static code only
-var protobuf = require("protobufjs/minimal");
+var protobuf = require("@tanglechat/protobufjs/minimal");
 ```
 
-The optional [command line utility](./cli/) to generate static code and reflection bundles lives in the `protobufjs-cli` package and can be installed separately:
+The optional [command line utility](./cli/) to generate static code and reflection bundles lives in the `@tanglechat/protobufjs-cli` package and can be installed separately:
 
 ```sh
-npm install protobufjs-cli --save-dev
+npm install @tanglechat/protobufjs-cli --save-dev
 ```
 
 ### Browsers
@@ -76,14 +76,14 @@ npm install protobufjs-cli --save-dev
 Pick the variant matching your needs and replace the version tag with the exact [release](https://github.com/protobufjs/protobuf.js/tags) your project depends upon. For example, to use the minified full variant:
 
 ```html
-<script src="//cdn.jsdelivr.net/npm/protobufjs@7.X.X/dist/protobuf.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/@tanglechat/protobufjs@7.X.X/dist/protobuf.min.js"></script>
 ```
 
 | Distribution | Location
 |--------------|--------------------------------------------------------
-| Full         | <https://cdn.jsdelivr.net/npm/protobufjs/dist/>
-| Light        | <https://cdn.jsdelivr.net/npm/protobufjs/dist/light/>
-| Minimal      | <https://cdn.jsdelivr.net/npm/protobufjs/dist/minimal/>
+| Full         | <https://cdn.jsdelivr.net/npm/@tanglechat/protobufjs/dist/>
+| Light        | <https://cdn.jsdelivr.net/npm/@tanglechat/protobufjs/dist/light/>
+| Minimal      | <https://cdn.jsdelivr.net/npm/@tanglechat/protobufjs/dist/minimal/>
 
 All variants support CommonJS and AMD loaders and export globally as `window.protobuf`.
 

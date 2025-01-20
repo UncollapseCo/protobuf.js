@@ -1,5 +1,5 @@
 {
-  "name": "protobufjs-cli",
+  "name": "@tanglechat/protobufjs-cli",
   "description": "Translates between file formats and generates static code as well as TypeScript definitions.",
   "version": "1.1.4",
   "author": "Daniel Wirtz <dcode+protobufjs@dcode.io>",
@@ -18,7 +18,7 @@
     "pbts": "bin/pbts"
   },
   "peerDependencies": {
-    "protobufjs": "^7.0.0"
+    "@tanglechat/protobufjs": "^7.0.0"
   },
   "dependencies": {
     "chalk": "^4.0.0",

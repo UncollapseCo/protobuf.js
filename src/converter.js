@@ -68,7 +68,7 @@ function genValuePartial_fromObject(gen, field, fieldIndex, prop) {
             case "sint64":
             case "sfixed64": gen
                 ("if(typeof BigInt!==\"undefined\")")
-                    ("m%s=(typeof d%s===\"number\"||typeof d%s===\"string\")?BigInt(d%s):util._toBigInt(d%s.low,d%s.high,%j)", prop, prop, prop, prop, prop, prop, isUnsigned)
+                    ("m%s=typeof d%s===\"bigint\"?d%s:(typeof d%s===\"number\"||typeof d%s===\"string\")?BigInt(d%s):util._toBigInt(d%s.low,d%s.high,%j)", prop, prop, prop, prop, prop, prop, prop, prop, isUnsigned)
                 ("else if(util.Long)")
                     ("(m%s=util.Long.fromValue(d%s)).unsigned=%j", prop, prop, isUnsigned)
                 ("else if(typeof d%s===\"string\")", prop)
@@ -185,6 +185,8 @@ function genValuePartial_toObject(gen, field, fieldIndex, prop) {
             case "sfixed64": gen
             ("if(typeof m%s===\"number\")", prop)
                 ("d%s=o.longs===String?String(m%s):m%s", prop, prop, prop)
+            ("else if(typeof m%s===\"bigint\")", prop)
+                ("d%s=o.longs===String?m%s.toString():o.longs===Number?util.LongBits.fromBigInt(m%s).toNumber(%s):m%s", prop, prop, prop, isUnsigned ? "true": "", prop)
             ("else") // Long-like
                 ("d%s=o.longs===String?util.Long.prototype.toString.call(m%s):o.longs===Number?new util.LongBits(m%s.low>>>0,m%s.high>>>0).toNumber(%s):o.longs===BigInt?new util.LongBits(m%s.low>>>0,m%s.high>>>0).toBigInt(%s):m%s", prop, prop, prop, prop, isUnsigned ? "true": "", prop, prop, isUnsigned ? "true": "", prop);
                 break;

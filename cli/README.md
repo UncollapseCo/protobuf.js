@@ -67,6 +67,7 @@ Translates between file formats and generates static code.
 
   --force-long     Enforces the use of 'Long' for s-/u-/int64 and s-/fixed64 fields.
   --force-number   Enforces the use of 'number' for s-/u-/int64 and s-/fixed64 fields.
+  --force-bigint   Enforces the use of 'bigint' for s-/u-/int64 and s-/fixed64 fields.
   --force-message  Enforces the use of message instances instead of plain objects.
   
   --null-defaults  Default value for optional fields is null instead of zero value.

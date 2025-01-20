@@ -335,7 +335,7 @@ function toJsType(field, parentIsInterface = false) {
         case "sint64":
         case "fixed64":
         case "sfixed64":
-            type = config.forceLong ? "Long" : config.forceNumber ? "number" : "number|Long";
+            type = config.forceBigint ? "bigint" : config.forceLong ? "Long" : config.forceNumber ? "number" : "number|Long|bigint";
             break;
         case "bool":
             type = "boolean";

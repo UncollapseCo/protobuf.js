@@ -41,7 +41,7 @@ exports.main = function main(args, callback) {
             "force-message": "strict-message"
         },
         string: [ "target", "out", "path", "wrap", "dependency", "root", "lint", "filter" ],
-        boolean: [ "create", "encode", "decode", "verify", "convert", "delimited", "typeurl", "beautify", "comments", "service", "es6", "sparse", "keep-case", "alt-comment", "force-long", "force-number", "force-enum-string", "force-message", "null-defaults", "null-semantics"],
+        boolean: [ "create", "encode", "decode", "verify", "convert", "delimited", "typeurl", "beautify", "comments", "service", "es6", "sparse", "keep-case", "alt-comment", "force-long", "force-number", "force-bigint", "force-enum-string", "force-message", "null-defaults", "null-semantics"],
         default: {
             target: "json",
             create: true,
@@ -60,6 +60,7 @@ exports.main = function main(args, callback) {
             "alt-comment": false,
             "force-long": false,
             "force-number": false,
+            "force-bigint": false,
             "force-enum-string": false,
             "force-message": false,
             "null-defaults": false,
@@ -146,6 +147,7 @@ exports.main = function main(args, callback) {
                 "",
                 "  --force-long     Enforces the use of 'Long' for s-/u-/int64 and s-/fixed64 fields.",
                 "  --force-number   Enforces the use of 'number' for s-/u-/int64 and s-/fixed64 fields.",
+                "  --force-bigint   Enforces the use of 'bigint' for s-/u-/int64 and s-/fixed64 fields.",
                 "  --force-message  Enforces the use of message instances instead of plain objects.",
                 "",
                 "  --null-defaults  Default value for optional fields is null instead of zero value.",
